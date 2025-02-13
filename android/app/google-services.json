@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "774316991258",
+    "firebase_url": "https://mapper-d7bda-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mapper-d7bda",
+    "storage_bucket": "mapper-d7bda.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774316991258:android:4a412632061f4af4e382a3",
+        "android_client_info": {
+          "package_name": "com.example.mapper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrqyX6B9EJX2G8N8qPySkglfyAORiR0cA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

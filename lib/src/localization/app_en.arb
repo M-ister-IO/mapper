@@ -1,0 +1,6 @@
+{
+  "appTitle": "mapper",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
