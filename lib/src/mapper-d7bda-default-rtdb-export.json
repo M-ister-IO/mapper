@@ -1,0 +1,140 @@
+{
+  "friendships": {
+    "-OItkGbh4aC1YACx-KLm": {
+      "status": "pending",
+      "user1": "user2",
+      "user2": "user3"
+    },
+    "-OItlfuk4oWddQkGcsk6": {
+      "status": "pending",
+      "user1": "user3",
+      "user2": "user1"
+    },
+    "-OIu9RHBLva1_AkjyktV": {
+      "status": "pending",
+      "user1": "yt6a7cAhZnTFjIZDvyKLQpZyMGy2",
+      "user2": "user1"
+    },
+    "-OIuaP8dQn7CwC7gOV6A": {
+      "status": "accepted",
+      "user1": "yt6a7cAhZnTFjIZDvyKLQpZyMGy2",
+      "user2": "user2"
+    },
+    "-OIuafsqoEmmMeUj2AZJ": {
+      "status": "pending",
+      "user1": "5ZNXSgSOisb1YwhGUSpudHZv8h93",
+      "user2": "44mQhuWHQHdtex4I3Wja6dxA8Jn1"
+    },
+    "-OIuag-s-JawZkfPbxxY": {
+      "status": "pending",
+      "user1": "5ZNXSgSOisb1YwhGUSpudHZv8h93",
+      "user2": "yt6a7cAhZnTFjIZDvyKLQpZyMGy2"
+    }
+  },
+  "users": {
+    "44mQhuWHQHdtex4I3Wja6dxA8Jn1": {
+      "email": "abc@gmail.com",
+      "mapsCorrect": 0,
+      "mapsPlayed": 1,
+      "ratio": 0,
+      "username": "Charles",
+      "xp": 20
+    },
+    "5ZNXSgSOisb1YwhGUSpudHZv8h93": {
+      "email": "abcd@gmail.com",
+      "mapsPlayed": 0,
+      "ratio": 0,
+      "username": "toto",
+      "xp": 0
+    },
+    "user1": {
+      "mapsCorrect": 10,
+      "mapsPlayed": 47,
+      "ratio": 0.2127659574468085,
+      "username": "Mister_IO",
+      "xp": 1500
+    },
+    "user2": {
+      "mapsCorrect": 7,
+      "mapsPlayed": 10,
+      "ratio": 0.7,
+      "username": "AnotherUser",
+      "xp": 200
+    },
+    "user3": {
+      "mapsCorrect": 70,
+      "mapsPlayed": 100,
+      "ratio": 0.7,
+      "username": "Darkxxx",
+      "xp": 20000
+    },
+    "yt6a7cAhZnTFjIZDvyKLQpZyMGy2": {
+      "currentStreak": 2,
+      "email": "abc@gmail.com",
+      "lastPlayedDate": "2025-02-12",
+      "mapsCorrect": 1,
+      "mapsPlayed": 14,
+      "ratio": 0.07142857142857142,
+      "username": "Charles",
+      "xp": 360
+    }
+  },
+  "map_titles": {
+    "map_0": {
+      "real_title": "Mortality rate of children under five",
+      "wrong_titles": [
+        "Average lifespan of adults",
+        "Number of hospitals per capita",
+        "Literacy rate of children"
+      ]
+    },
+    "map_1": {
+      "real_title": "Alcohol consumption per capita",
+      "wrong_titles": [
+        "Water consumption per capita",
+        "Average daily calorie intake",
+        "Number of gyms per capita"
+      ]
+    },
+    "map_2": {
+      "real_title": "Children per woman",
+      "wrong_titles": [
+        "Average household size",
+        "Number of schools per capita",
+        "Employment rate of women"
+      ]
+    },
+    "map_3": {
+      "real_title": "Median Age",
+      "wrong_titles": [
+        "Average income per household",
+        "Number of elderly homes",
+        "Population growth rate"
+      ]
+    },
+    "map_4": {
+      "real_title": "GDP per capita",
+      "wrong_titles": [
+        "Average household debt",
+        "Number of banks per capita",
+        "Inflation rate"
+      ]
+    },
+    "map_5": {
+      "real_title": "Energy use per capita",
+      "wrong_titles": [
+        "Water usage per capita",
+        "Number of power plants",
+        "Average temperature"
+      ]
+    },
+    "map_6": {
+      "real_title": "Land area",
+      "wrong_titles": [
+        "Population density",
+        "Number of cities",
+        "Average rainfall"
+      ]
+    }
+  }
+}

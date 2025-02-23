@@ -100,22 +100,18 @@ class _GeneralGamePageState extends State<GeneralGamePage> {
           Expanded(
             child: Center(
               child: Container(
-                width: MediaQuery.of(context).size.width * 0.9, // 80% of screen width
-                height: MediaQuery.of(context).size.height * 0.4, // 50% of screen height
+                width: MediaQuery.of(context).size.width * 0.9, // 90% width
+                height: MediaQuery.of(context).size.height * 0.4, // 40% height
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey, width: 6),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                // Use ClipRRect to enforce the rounded corners.
+                // Clip to enforce rounded corners.
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  // Transform.scale scales the SVG slightly up to cover any gap.
-                  child: Transform.scale(
-                    scale: 1.02,
-                    child: SvgPicture.asset(
-                      currentQuestion.svgPath,
-                      fit: BoxFit.fill,
-                    ),
+                  child: SvgPicture.asset(
+                    currentQuestion.svgPath,
+                    fit: BoxFit.cover, // Ensures the SVG fills the container.
                   ),
                 ),
               ),
@@ -141,8 +137,9 @@ class _GeneralGamePageState extends State<GeneralGamePage> {
                     if (answerChecked && selectedChoiceIndex == index) {
                       buttonColor = choice.isCorrect ? Colors.green : Colors.red;
                     }
-                    // Compute contrasting text color based on the button background brightness.
-                    Color textColor = buttonColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+                    Color textColor = buttonColor.computeLuminance() > 0.5
+                        ? Colors.black
+                        : Colors.white;
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: buttonColor,
@@ -150,8 +147,10 @@ class _GeneralGamePageState extends State<GeneralGamePage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        textStyle:
-                            Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18),
+                        textStyle: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontSize: 18),
                       ),
                       onPressed: () => onChoiceSelected(index),
                       child: Text(choice.text),
@@ -159,23 +158,19 @@ class _GeneralGamePageState extends State<GeneralGamePage> {
                   },
                 ),
                 SizedBox(height: 20),
-                // Reserve a fixed height for the button area to prevent movement.
+                // Reserve a fixed height for the button area so layout doesn't shift.
                 Container(
-                  height: 48, // Fixed height matching button's height
+                  height: 48,
                   child: Center(
                     child: answerChecked
                         ? ElevatedButton(
                             onPressed: onNextQuestion,
-                            child: Text(
-                              currentQuestionIndex < quizQuestions!.length - 1
-                                  ? "Next Question"
-                                  : "See Summary",
-                            ),
+                            child: Text("Next Question"),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFFCCD5AE), // Your accent color
                             ),
                           )
-                        : SizedBox.shrink(), // No button if answer isn't checked
+                        : SizedBox.shrink(),
                   ),
                 ),
               ],

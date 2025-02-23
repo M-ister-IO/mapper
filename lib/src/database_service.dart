@@ -1,74 +1,93 @@
 //// filepath: /D:/Flutter Apps/Mapper/mapper/lib/src/database_service.dart
 import 'dart:async';
 import 'dart:math';
+import 'package:firebase_database/firebase_database.dart';
 import 'models.dart';
+import 'package:collection/collection.dart'; // Import this for map conversion
+
+Future<Map<String, dynamic>> fetchMapTitles() async {
+  DatabaseReference ref = FirebaseDatabase.instance.ref('map_titles');
+  DatabaseEvent event = await ref.once();
+
+  if (event.snapshot.value != null && event.snapshot.value is Map<Object?, Object?>) {
+    return deepMapToStringKey(event.snapshot.value as Map<Object?, Object?>);
+  } else {
+    throw Exception("Failed to load map titles");
+  }
+}
+
+/// Recursively converts Map<Object?, Object?> to Map<String, dynamic>
+Map<String, dynamic> deepMapToStringKey(Map<Object?, Object?> map) {
+  return map.map((key, value) {
+    return MapEntry(
+      key.toString(), // Convert keys to String
+      value is Map<Object?, Object?> ? deepMapToStringKey(value) : value, // Recursively convert nested maps
+    );
+  });
+}
+
 
 /// Returns a single [GameData] object (the first one from all available).
 Future<GameData> fetchGameData() async {
-  List<GameData> games = await fetchAllGameData();
-  return games.first;
-}
-
-/// Returns a list of randomly generated [GameData] objects.
-Future<List<GameData>> fetchAllGameData() async {
-  await Future.delayed(Duration(seconds: 1)); // Simulate network delay
+  Map<String, dynamic> mapTitles = await fetchMapTitles();
   Random random = Random();
-  List<GameData> games = [];
-  
-  // Generate 5 random game questions
-  for (int i = 1; i <= 5; i++) {
-    // Randomly choose which option will be correct
-    int correctIndex = random.nextInt(4);
-    
-    // Generate 4 choices with random names
-    List<ChoiceData> choices = List.generate(4, (j) {
-      return ChoiceData(
-        text: 'Option ${i}${String.fromCharCode(65 + j)}', 
-        isCorrect: j == correctIndex,
-      );
-    });
-    
-    // Use the id (i) as a suffix for the image filename
-    games.add(GameData(
-      svgPath: 'assets/images/svg_maps/map_$i.svg',
-      choices: choices,
-    ));
-  }
-  
-  return games;
+  int mapIndex = random.nextInt(mapTitles.length);
+  String mapKey = 'map_$mapIndex';
+
+  Map<String, dynamic> mapData = mapTitles[mapKey];
+  String realTitle = mapData['real_title'];
+  List<String> wrongTitles = List<String>.from(mapData['wrong_titles']);
+
+  // Shuffle the choices and determine the correct one
+  List<String> allTitles = [realTitle, ...wrongTitles];
+  allTitles.shuffle(random);
+
+  List<ChoiceData> choices = allTitles.map((title) {
+    return ChoiceData(
+      text: title,
+      isCorrect: title == realTitle,
+    );
+  }).toList();
+
+  return GameData(
+    svgPath: 'assets/images/svg_maps/$mapKey.svg',
+    choices: choices,
+  );
 }
 
 /// Returns a list of randomly generated [GameData] objects.
 /// For a quiz session, we randomly choose 5 images from all available images.
 Future<List<GameData>> fetchQuizData() async {
-  await Future.delayed(Duration(seconds: 1)); // Simulate network delay
+  Map<String, dynamic> mapTitles = await fetchMapTitles();
   Random random = Random();
-  
-  // Suppose we have 10 available images in the folder.
-  List<int> availableImageIds = List.generate(10, (index) => index + 1);
-  // Shuffle and pick 5 unique image ids.
+
+  List<int> availableImageIds = List.generate(mapTitles.length, (index) => index);
   availableImageIds.shuffle(random);
   List<int> quizImageIds = availableImageIds.take(5).toList();
 
   List<GameData> games = [];
   for (int id in quizImageIds) {
-    // Randomly choose which option will be correct
-    int correctIndex = random.nextInt(4);
-    
-    // Generate 4 choices with random names
-    List<ChoiceData> choices = List.generate(4, (j) {
+    String mapKey = 'map_$id';
+    Map<String, dynamic> mapData = mapTitles[mapKey];
+    String realTitle = mapData['real_title'];
+    List<String> wrongTitles = List<String>.from(mapData['wrong_titles']);
+
+    // Shuffle the choices and determine the correct one
+    List<String> allTitles = [realTitle, ...wrongTitles];
+    allTitles.shuffle(random);
+
+    List<ChoiceData> choices = allTitles.map((title) {
       return ChoiceData(
-        text: 'Option ${id}${String.fromCharCode(65 + j)}', 
-        isCorrect: j == correctIndex,
+        text: title,
+        isCorrect: title == realTitle,
       );
-    });
-    
-    // Append the game question using the randomly chosen image id
+    }).toList();
+
     games.add(GameData(
-      svgPath: 'assets/images/svg_maps/map_$id.svg',
+      svgPath: 'assets/images/svg_maps/$mapKey.svg',
       choices: choices,
     ));
   }
-  
+
   return games;
 }
