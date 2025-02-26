@@ -9,10 +9,13 @@ project 'Runner', {
 
 install! 'cocoapods', :disable_input_output_paths => true
 
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/firebase/firebase-ios-sdk.git'
 
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
+  pod 'FirebaseCore', :modular_headers => true
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Database'
