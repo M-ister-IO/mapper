@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class ProfileService {
-  final DatabaseReference _db = FirebaseDatabase.instance.reference();
+  final DatabaseReference _db = FirebaseDatabase.instance.ref();
 
   // Create or update a user profile.
   Future<void> setUserProfile({
@@ -22,12 +22,12 @@ class ProfileService {
   }
 
   // Get user profile by userId.
-  Stream<Event> getUserProfile(String userId) {
+  Stream<DatabaseEvent> getUserProfile(String userId) {
     return _db.child('users').child(userId).onValue;
   }
 
   // Get leaderboard (top 10 by XP).
-  Stream<Event> getLeaderboard() {
+  Stream<DatabaseEvent> getLeaderboard() {
     return _db
         .child('users')
         .orderByChild('xp')

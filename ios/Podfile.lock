@@ -1431,7 +1431,6 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Firestore
-  - FirebaseCore
 
 SPEC REPOS:
   trunk:
@@ -1486,6 +1485,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
 
-PODFILE CHECKSUM: 49e1baf6e0c4114591729f737b45f4abfc0f4b3d
+PODFILE CHECKSUM: 6752c5a228408cefc5ddd6487d5e83b7866aea3a
 
 COCOAPODS: 1.16.2
